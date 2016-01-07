@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Eindproject_BePact.Models.Persoon>
+
+@{
+    ViewBag.Title = "Personen";
+}
+
+<h2>Alle Personen</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "PersonenController", null, new { @class="btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Voornaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Achternaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefoonnr)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Voornaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Achternaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefoonnr)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
