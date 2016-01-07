@@ -8,11 +8,10 @@ namespace Eindproject_BePact.DAL
     {
         public BePactContext() : base("BePactContext") { }
 
+        public DbSet<Bedrijf> Bedrijven { get; set; }
+        // Onderstaande DbSets kunnen hier weggelaten worden,
+        // het Entity Framework zou deze impliciet includen.
         public DbSet<Persoon> Personen { get; set; }
-        // DbSet<PersoonActiviteit> en DbSet<Activiteit> kunnen weggelaten worden.
-        // Het Entity Framework zou deze impliciet includen 
-        // Omdat de Persoon entiteit verwijst naar PersoonActiviteit,
-        // en deze op zijn beurt naar Activiteit.
         public DbSet<PersoonActiviteit> PersoonActiviteiten { get; set; }
         public DbSet<Activiteit> Activiteiten { get; set; }
 

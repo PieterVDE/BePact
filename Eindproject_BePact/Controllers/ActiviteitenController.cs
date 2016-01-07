@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Eindproject_BePact.DAL;
 using Eindproject_BePact.Models;
+using PagedList;
 
 namespace Eindproject_BePact.Controllers
 {
@@ -16,11 +17,45 @@ namespace Eindproject_BePact.Controllers
         private BePactContext db = new BePactContext();
 
         // GET: Activiteiten
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Activiteiten.ToList());
-        }
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
 
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var activiteiten = from a in db.Activiteiten
+                           select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                activiteiten = activiteiten.Where(a => a.ActiviteitType.ToString().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "type_desc":
+                    activiteiten = activiteiten.OrderByDescending(a => a.ActiviteitType);
+                    break;
+                default:
+                    activiteiten = activiteiten.OrderBy(a => a.ID);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(activiteiten.ToPagedList(pageNumber, pageSize));
+        }
         // GET: Activiteiten/Details/5
         public ActionResult Details(int? id)
         {

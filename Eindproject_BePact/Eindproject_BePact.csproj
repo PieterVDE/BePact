@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActiviteitenController.cs" />
+    <Compile Include="Controllers\BedrijvenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonenController.cs" />
     <Compile Include="DAL\BePactContext.cs" />
@@ -148,8 +149,17 @@
     <Compile Include="Migrations\201601070225032_InitialCreate.Designer.cs">
       <DependentUpon>201601070225032_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601070502466_BedrijvenAndMaxLengthOnPersoonFields.cs" />
+    <Compile Include="Migrations\201601070502466_BedrijvenAndMaxLengthOnPersoonFields.Designer.cs">
+      <DependentUpon>201601070502466_BedrijvenAndMaxLengthOnPersoonFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601070511100_PersonenValidation.cs" />
+    <Compile Include="Migrations\201601070511100_PersonenValidation.Designer.cs">
+      <DependentUpon>201601070511100_PersonenValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Activiteit.cs" />
+    <Compile Include="Models\Bedrijf.cs" />
     <Compile Include="Models\Persoon.cs" />
     <Compile Include="Models\PersoonActiviteit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,10 +214,21 @@
     <Content Include="Views\Activiteiten\Details.cshtml" />
     <Content Include="Views\Activiteiten\Edit.cshtml" />
     <Content Include="Views\Activiteiten\Index.cshtml" />
+    <Content Include="Views\Bedrijven\Create.cshtml" />
+    <Content Include="Views\Bedrijven\Delete.cshtml" />
+    <Content Include="Views\Bedrijven\Details.cshtml" />
+    <Content Include="Views\Bedrijven\Edit.cshtml" />
+    <Content Include="Views\Bedrijven\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601070225032_InitialCreate.resx">
       <DependentUpon>201601070225032_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070502466_BedrijvenAndMaxLengthOnPersoonFields.resx">
+      <DependentUpon>201601070502466_BedrijvenAndMaxLengthOnPersoonFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070511100_PersonenValidation.resx">
+      <DependentUpon>201601070511100_PersonenValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

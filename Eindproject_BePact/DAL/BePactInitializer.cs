@@ -10,11 +10,20 @@ namespace Eindproject_BePact.DAL
     {
         protected override void Seed(BePactContext context)
         {
+            var bedrijven = new List<Bedrijf> {
+                new Bedrijf { Naam="Bedrijf 1", Email="info@bedrijf1.be", Telefoonnr="015 12 34 56"},
+                new Bedrijf { Naam="Bedrijf 2", Email="info@bedrijf2.be", Telefoonnr="015 23 45 67"},
+                new Bedrijf { Naam="Bedrijf 3", Email="info@bedrijf3.be", Telefoonnr="015 34 56 78"},
+            };
+
+            bedrijven.ForEach(b => context.Bedrijven.Add(b));
+            context.SaveChanges();
+
             var personen = new List<Persoon>
             {
-                new Persoon { Voornaam="Persoon 1", Achternaam="Achternaam 1", Email="info@persoon1.be", Telefoonnr="0400 10 00 00"},
-                new Persoon { Voornaam="Persoon 2", Achternaam="Achternaam 2", Email="info@persoon2.be", Telefoonnr="0400 20 00 00"},
-                new Persoon { Voornaam="Persoon 3", Achternaam="Achternaam 3", Email="info@persoon3.be", Telefoonnr="0400 30 00 00"},
+                new Persoon { Voornaam="Persoon 1", Achternaam="Achternaam 1", Email="info@persoon1.be", Telefoonnr="0400 10 00 00", BedrijfID=1},
+                new Persoon { Voornaam="Persoon 2", Achternaam="Achternaam 2", Email="info@persoon2.be", Telefoonnr="0400 20 00 00", BedrijfID=2},
+                new Persoon { Voornaam="Persoon 3", Achternaam="Achternaam 3", Email="info@persoon3.be", Telefoonnr="0400 30 00 00", BedrijfID=3},
             };
 
             personen.ForEach(p => context.Personen.Add(p));

@@ -1,31 +1,28 @@
-﻿@model PagedList.IPagedList<Eindproject_BePact.Models.Persoon>
+﻿@model PagedList.IPagedList<Eindproject_BePact.Models.Bedrijf>
 @using PagedList.Mvc
 
 @{
-    ViewBag.Title = "Personen";
+    ViewBag.Title = "Bedrijven";
 }
 
-<h2>Alle Personen</h2>
+<h2>Alle bedrijven</h2>
 
 <p>
-    @Html.ActionLink("Persoon toevoegen", "Create", "Personen", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Bedrijf toevoegen", "Create", "Bedrijven", null, new { @class = "btn btn-primary" })
 </p>
 
-@using (Html.BeginForm("Index", "Personen", FormMethod.Get, new { @class = "form-inline" }))
+@using (Html.BeginForm("Index", "Bedrijven", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="form-group">
         <label class="sr-only" for="Zoeken">Zoeken</label>
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class="form-control", @placeholder= "Zoeken op naam, email of telefoonnr" })
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Zoeken op naam, email of telefoonnr" })
     </div>
     <button type="submit" class="btn btn-default">Zoeken</button>
 }
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Voornaam", "Index", new { sortOrder = ViewBag.VNaamSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Achternaam", "Index", new { sortOrder = ViewBag.ANaamSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Naam", "Index", new { sortOrder = ViewBag.NaamSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -40,10 +37,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Voornaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Achternaam)
+                @Html.DisplayFor(modelItem => item.Naam)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
