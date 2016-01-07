@@ -13,36 +13,47 @@
         <dt>
             @Html.DisplayNameFor(model => model.Voornaam)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Voornaam)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Achternaam)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Achternaam)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Telefoonnr)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Telefoonnr)
+            <a href="tel:@Html.DisplayFor(model => model.Telefoonnr)">@Html.DisplayFor(model => model.Telefoonnr)</a>
         </dd>
-
     </dl>
+    <hr />
+    <h4>Aangeboden activiteiten</h4>
+    <table class="table table-responsive">
+        <tr>
+            <th>Type</th>
+            <th>Beschrijving</th>
+        </tr>
+        @foreach (var a in Model.PersoonActiviteiten)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(aItem => a.Activiteit.ActiviteitType)
+                </td>
+                <td>
+                    @Html.DisplayFor(aItem => a.Beschrijving)
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

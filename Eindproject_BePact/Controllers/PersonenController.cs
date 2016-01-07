@@ -47,13 +47,21 @@ namespace Eindproject_BePact.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Voornaam,Achternaam,Email,Telefoonnr")] Persoon persoon)
+        public ActionResult Create([Bind(Include = "Voornaam,Achternaam,Email,Telefoonnr")] Persoon persoon)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Personen.Add(persoon);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Personen.Add(persoon);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "De wijzigingen konden niet opgeslagen worden. Probeer het opnieuw, als het probleem zich opnieuw voordoet contacteer je best de systeembeheerder.");
             }
 
             return View(persoon);
@@ -77,25 +85,43 @@ namespace Eindproject_BePact.Controllers
         // POST: Personen/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Voornaam,Achternaam,Email,Telefoonnr")] Persoon persoon)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(persoon).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(persoon);
-        }
-
-        // GET: Personen/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult EditPost(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var persoonToUpdate = db.Personen.Find(id);
+            if (TryUpdateModel(persoonToUpdate, "",
+               new string[] { "Voornaam", "Achternaam", "Email", "Telefoonnr" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "De wijzigingen konden niet opgeslagen worden. Probeer het opnieuw, als het probleem zich opnieuw voordoet contacteer je best de systeembeheerder.");
+                }
+            }
+            return View(persoonToUpdate);
+        }
+
+        // GET: Personen/Delete/5
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Verwijderen is mislukt. Probeer het opnieuw, en als het probleem zich blijft voordoen contacteer je best de systeembeheerder.";
             }
             Persoon persoon = db.Personen.Find(id);
             if (persoon == null)
@@ -106,13 +132,22 @@ namespace Eindproject_BePact.Controllers
         }
 
         // POST: Personen/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Persoon persoon = db.Personen.Find(id);
-            db.Personen.Remove(persoon);
-            db.SaveChanges();
+            try
+            {
+                //Better performance than find & remove
+                Persoon persoonToDelete = new Persoon() { ID = id };
+                db.Entry(persoonToDelete).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 

@@ -7,7 +7,7 @@
 <h2>Alle Personen</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "PersonenController", null, new { @class="btn btn-primary" })
+    @Html.ActionLink("Persoon toevoegen", "Create", "Personen", null, new { @class="btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Telefoonnr)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Aanpassen", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Verwijderen", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

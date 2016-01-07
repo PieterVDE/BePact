@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActiviteitenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonenController.cs" />
     <Compile Include="DAL\BePactContext.cs" />
@@ -184,6 +185,11 @@
     <Content Include="Views\Personen\Details.cshtml" />
     <Content Include="Views\Personen\Edit.cshtml" />
     <Content Include="Views\Personen\Index.cshtml" />
+    <Content Include="Views\Activiteiten\Create.cshtml" />
+    <Content Include="Views\Activiteiten\Delete.cshtml" />
+    <Content Include="Views\Activiteiten\Details.cshtml" />
+    <Content Include="Views\Activiteiten\Edit.cshtml" />
+    <Content Include="Views\Activiteiten\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

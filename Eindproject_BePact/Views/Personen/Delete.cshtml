@@ -1,14 +1,15 @@
 ﻿@model Eindproject_BePact.Models.Persoon
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Verwijder persoon";
 }
 
-<h2>Delete</h2>
+<h2>Persoon verwijderen</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<p class="error">@ViewBag.ErrorMessage</p>
+
+<h3>Ben je zeker dat je deze persoon wilt verwijderen?</h3>
 <div>
-    <h4>Persoon</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,8 +50,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Verwijder persoon" class="btn btn-danger" /> |
+            @Html.ActionLink("Terug naar het overzicht", "Index")
         </div>
     }
 </div>
