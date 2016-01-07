@@ -25,3 +25,7 @@ textarea {
 #SearchString {
     min-width: 260px;
 }
+
+.form-inline {
+    margin: 30px 0;
+}

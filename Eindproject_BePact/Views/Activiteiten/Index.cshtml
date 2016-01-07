@@ -7,9 +7,9 @@
 
 <h2>Alle activiteiten</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Activiteit toevoegen", "Create", "Activiteiten", null, new { @class = "btn btn-primary" })
-</p>
+</p>*@
 
 @using (Html.BeginForm("Index", "Activiteiten", FormMethod.Get, new { @class = "form-inline" }))
 {
@@ -19,7 +19,7 @@
     </div>
     <button type="submit" class="btn btn-default">Zoeken</button>
 }
-<table class="table">
+<table class="table table-responsive table-striped table-hover">
     <tr>
         <th>
             @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -34,9 +34,9 @@
                 @Html.DisplayFor(modelItem => item.ActiviteitType)
             </td>
             <td class="text-right">
-                @Html.ActionLink("Aanpassen", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Verwijderen", "Delete", new { id = item.ID })
+                <a href="@Url.Action("Details", "Activiteiten", new { id = item.ID })"><i class="material-icons">remove_red_eye</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                @*<a href="@Url.Action("Edit", "Activiteiten", new { id = item.ID })"><i class="material-icons">edit</i></a>&nbsp;&nbsp;&nbsp;&nbsp;*@
+                @*<a href="@Url.Action("Delete", "Activiteiten", new { id = item.ID })"><i class="material-icons">delete</i></a>*@
             </td>
         </tr>
     }

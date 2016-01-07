@@ -21,6 +21,7 @@
     <table class="table table-responsive">
         <tr>
             <th>Naam</th>
+            <th>Bedrijf</th>
             <th>Beschrijving activiteit</th>
         </tr>
         @foreach (var a in Model.PersoonActiviteiten)
@@ -28,6 +29,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(aItem => a.Persoon.Voornaam) @Html.DisplayFor(aItem => a.Persoon.Achternaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(aItem => a.Persoon.Bedrijf.Naam)
                 </td>
                 <td>
                     @Html.DisplayFor(aItem => a.Beschrijving)

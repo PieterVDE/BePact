@@ -34,10 +34,16 @@
         <dd>
             <a href="tel:@Html.DisplayFor(model => model.Telefoonnr)">@Html.DisplayFor(model => model.Telefoonnr)</a>
         </dd>
+        <dt>
+            Bedrijf
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bedrijf.Naam)
+        </dd>
     </dl>
     <hr />
     <h4>Aangeboden activiteiten</h4>
-    <table class="table table-responsive">
+    <table class="table table-responsive table-striped table-hover">
         <tr>
             <th>Type</th>
             <th>Beschrijving</th>

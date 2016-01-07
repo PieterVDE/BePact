@@ -7,13 +7,13 @@ namespace Eindproject_BePact.Models
     public class Persoon
     {
         public int ID { get; set; }
-        [StringLength(50, ErrorMessage = "Voornaam moet 2-50 karakters bevatten.", MinimumLength = 2)]
+        [Required, StringLength(50, ErrorMessage = "Voornaam moet 2-50 karakters bevatten.", MinimumLength = 2)]
         public string Voornaam { get; set; }
-        [StringLength(50, ErrorMessage = "Achternaam moet 2-50 karakters bevatten.", MinimumLength = 2)]
+        [Required, StringLength(50, ErrorMessage = "Achternaam moet 2-50 karakters bevatten.", MinimumLength = 2)]
         public string Achternaam { get; set; }
-        [StringLength(50, ErrorMessage = "Email moet 5-50 karakters bevatten.", MinimumLength = 5)]
+        [Required, DataType(DataType.EmailAddress), StringLength(50, ErrorMessage = "Email moet 5-50 karakters bevatten.", MinimumLength = 5)]
         public string Email { get; set; }
-        [Display(Name = "Telefoonnummer"), StringLength(15, ErrorMessage = "Telefoonnummer moet 5-15 karakters bevatten.", MinimumLength = 5)]
+        [Required, Display(Name = "Telefoonnummer"), StringLength(15, ErrorMessage = "Telefoonnummer moet 5-15 karakters bevatten.", MinimumLength = 5)]
         public string Telefoonnr { get; set; }
         public int? BedrijfID { get; set; }
 

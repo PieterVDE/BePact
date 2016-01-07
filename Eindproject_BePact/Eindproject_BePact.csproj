@@ -157,6 +157,18 @@
     <Compile Include="Migrations\201601070511100_PersonenValidation.Designer.cs">
       <DependentUpon>201601070511100_PersonenValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601070609306_UpdateValidation.cs" />
+    <Compile Include="Migrations\201601070609306_UpdateValidation.Designer.cs">
+      <DependentUpon>201601070609306_UpdateValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601070627540_RequireFields.cs" />
+    <Compile Include="Migrations\201601070627540_RequireFields.Designer.cs">
+      <DependentUpon>201601070627540_RequireFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601070631046_UpdatedValidation.cs" />
+    <Compile Include="Migrations\201601070631046_UpdatedValidation.Designer.cs">
+      <DependentUpon>201601070631046_UpdatedValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Activiteit.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -230,6 +242,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601070511100_PersonenValidation.resx">
       <DependentUpon>201601070511100_PersonenValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070609306_UpdateValidation.resx">
+      <DependentUpon>201601070609306_UpdateValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070627540_RequireFields.resx">
+      <DependentUpon>201601070627540_RequireFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070631046_UpdatedValidation.resx">
+      <DependentUpon>201601070631046_UpdatedValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

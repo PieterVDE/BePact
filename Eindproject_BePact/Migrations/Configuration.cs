@@ -28,9 +28,9 @@ namespace Eindproject_BePact.Migrations
 
             var personen = new List<Persoon>
             {
-                new Persoon { Voornaam="Persoon 1", Achternaam="Achternaam 1", Email="info@persoon1.be", Telefoonnr="0400 10 00 00"},
-                new Persoon { Voornaam="Persoon 2", Achternaam="Achternaam 2", Email="info@persoon2.be", Telefoonnr="0400 20 00 00"},
-                new Persoon { Voornaam="Persoon 3", Achternaam="Achternaam 3", Email="info@persoon3.be", Telefoonnr="0400 30 00 00"},
+                new Persoon { Voornaam="Persoon 1", Achternaam="Achternaam 1", Email="info@persoon1.be", Telefoonnr="0400 10 00 00", BedrijfID=1},
+                new Persoon { Voornaam="Persoon 2", Achternaam="Achternaam 2", Email="info@persoon2.be", Telefoonnr="0400 20 00 00", BedrijfID=2},
+                new Persoon { Voornaam="Persoon 3", Achternaam="Achternaam 3", Email="info@persoon3.be", Telefoonnr="0400 30 00 00", BedrijfID=3},
             };
 
             personen.ForEach(p => context.Personen.AddOrUpdate(s => new { s.Email, s.Telefoonnr }, p));
