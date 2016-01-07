@@ -24,7 +24,7 @@ namespace Eindproject_BePact
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-theme.css",
+                      "~/Content/bootstrap-theme-flatly.css",
                       "~/Content/site.css"));
         }
     }
