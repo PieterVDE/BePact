@@ -47,13 +47,21 @@ namespace Eindproject_BePact.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ActiviteitType")] Activiteit activiteit)
+        public ActionResult Create([Bind(Include = "ActiviteitType")] Activiteit activiteit)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Activiteiten.Add(activiteit);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Activiteiten.Add(activiteit);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "De wijzigingen konden niet opgeslagen worden. Probeer het opnieuw, als het probleem zich opnieuw voordoet contacteer je best de systeembeheerder.");
             }
 
             return View(activiteit);
@@ -77,25 +85,43 @@ namespace Eindproject_BePact.Controllers
         // POST: Activiteiten/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ActiviteitType")] Activiteit activiteit)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(activiteit).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(activiteit);
-        }
-
-        // GET: Activiteiten/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult EditPost(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var activiteitToUpdate = db.Personen.Find(id);
+            if (TryUpdateModel(activiteitToUpdate, "",
+               new string[] { "ActiviteitType" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "De wijzigingen konden niet opgeslagen worden. Probeer het opnieuw, als het probleem zich opnieuw voordoet contacteer je best de systeembeheerder.");
+                }
+            }
+            return View(activiteitToUpdate);
+        }
+
+        // GET: Activiteiten/Delete/5
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Verwijderen is mislukt. Probeer het opnieuw, en als het probleem zich blijft voordoen contacteer je best de systeembeheerder.";
             }
             Activiteit activiteit = db.Activiteiten.Find(id);
             if (activiteit == null)
@@ -106,13 +132,22 @@ namespace Eindproject_BePact.Controllers
         }
 
         // POST: Activiteiten/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Activiteit activiteit = db.Activiteiten.Find(id);
-            db.Activiteiten.Remove(activiteit);
-            db.SaveChanges();
+            try
+            {
+                //Better performance than find & remove
+                Activiteit activiteitToDelete = new Activiteit() { ID = id };
+                db.Entry(activiteitToDelete).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 

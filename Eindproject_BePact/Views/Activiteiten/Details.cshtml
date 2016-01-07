@@ -1,26 +1,42 @@
 ﻿@model Eindproject_BePact.Models.Activiteit
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Activiteit \"" + Html.DisplayFor(model => model.ActiviteitType) + "\"";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.ActiviteitType)</h2>
 
 <div>
-    <h4>Activiteit</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ActiviteitType)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ActiviteitType)
         </dd>
-
     </dl>
+    <hr />
+    <h4>Personen die deze activiteit aanbieden</h4>
+    <table class="table table-responsive">
+        <tr>
+            <th>Naam</th>
+            <th>Beschrijving activiteit</th>
+        </tr>
+        @foreach (var a in Model.PersoonActiviteiten)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(aItem => a.Persoon.Voornaam) @Html.DisplayFor(aItem => a.Persoon.Achternaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(aItem => a.Beschrijving)
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Terug naar het overzicht", "Index")
 </p>
