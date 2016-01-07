@@ -169,6 +169,7 @@
     <Content Include="App_Data\BePact_log.ldf">
       <DependentUpon>BePact.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-theme-flatly.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
