@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Eindproject_BePact.DAL;
 using Eindproject_BePact.Models;
+using PagedList;
 
 namespace Eindproject_BePact.Controllers
 {
@@ -16,10 +15,70 @@ namespace Eindproject_BePact.Controllers
         private BePactContext db = new BePactContext();
 
         // GET: Personen
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Personen.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.VNaamSortParm = String.IsNullOrEmpty(sortOrder) ? "vnaam_desc" : "";
+            ViewBag.ANaamSortParm = sortOrder == "Achternaam" ? "anaam_desc" : "Achternaam";
+            ViewBag.EmailSortParm = sortOrder == "Email" ? "email_desc" : "Email";
+            ViewBag.TelnrSortParm = sortOrder == "Telefoonnr" ? "telnr_desc" : "Telefoonnr";
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            } else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var personen = from p in db.Personen
+                           select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                personen = personen.Where(p => p.Voornaam.Contains(searchString)
+                                    || p.Achternaam.Contains(searchString)
+                                    || p.Email.Contains(searchString)
+                                    || p.Telefoonnr.Contains(searchString));
+            }
+
+                switch (sortOrder)
+            {
+                case "vnaam_desc":
+                    personen = personen.OrderByDescending(p => p.Voornaam);
+                    break;
+                case "Achternaam":
+                    personen = personen.OrderBy(p => p.Achternaam);
+                    break;
+                case "anaam_desc":
+                    personen = personen.OrderByDescending(p => p.Achternaam);
+                    break;
+                case "Email":
+                    personen = personen.OrderBy(p => p.Email);
+                    break;
+                case "email_desc":
+                    personen = personen.OrderByDescending(p => p.Email);
+                    break;
+                case "Telefoonnr":
+                    personen = personen.OrderBy(p => p.Telefoonnr);
+                    break;
+                case "telnr_desc":
+                    personen = personen.OrderByDescending(p => p.Telefoonnr);
+                    break;
+                default:
+                    personen = personen.OrderBy(p => p.ID);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(personen.ToPagedList(pageNumber, pageSize));
         }
+
 
         // GET: Personen/Details/5
         public ActionResult Details(int? id)
