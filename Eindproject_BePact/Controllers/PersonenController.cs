@@ -27,7 +27,8 @@ namespace Eindproject_BePact.Controllers
             if (searchString != null)
             {
                 page = 1;
-            } else
+            }
+            else
             {
                 searchString = currentFilter;
             }
@@ -45,7 +46,7 @@ namespace Eindproject_BePact.Controllers
                                     || p.Telefoonnr.Contains(searchString));
             }
 
-                switch (sortOrder)
+            switch (sortOrder)
             {
                 case "vnaam_desc":
                     personen = personen.OrderByDescending(p => p.Voornaam);

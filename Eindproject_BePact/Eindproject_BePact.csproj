@@ -169,6 +169,14 @@
     <Compile Include="Migrations\201601070631046_UpdatedValidation.Designer.cs">
       <DependentUpon>201601070631046_UpdatedValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601070821131_AddWebsiteFieldToPersoon.cs" />
+    <Compile Include="Migrations\201601070821131_AddWebsiteFieldToPersoon.Designer.cs">
+      <DependentUpon>201601070821131_AddWebsiteFieldToPersoon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601070831090_RemoveWebsiteFromPersoon.cs" />
+    <Compile Include="Migrations\201601070831090_RemoveWebsiteFromPersoon.Designer.cs">
+      <DependentUpon>201601070831090_RemoveWebsiteFromPersoon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Activiteit.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -251,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601070631046_UpdatedValidation.resx">
       <DependentUpon>201601070631046_UpdatedValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070821131_AddWebsiteFieldToPersoon.resx">
+      <DependentUpon>201601070821131_AddWebsiteFieldToPersoon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601070831090_RemoveWebsiteFromPersoon.resx">
+      <DependentUpon>201601070831090_RemoveWebsiteFromPersoon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
